@@ -1,0 +1,15 @@
+*.iml
+*.log
+*.log.*
+*.pid
+target
+.bundle
+.idea
+vendor
+*.css
+.sass-cache
+reports/*.html
+*.swp
+*.iws
+*.ipr
+.DS_Store

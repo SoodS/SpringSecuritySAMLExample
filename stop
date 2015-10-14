@@ -1,0 +1,20 @@
+
+APP_PID_FILE=application.pid
+if [ -f $APP_PID_FILE ];
+then
+  echo "Stopping application..."
+  kill -9 `cat $APP_PID_FILE`
+  rm $APP_PID_FILE
+else
+  echo "Application is not running"
+fi
+
+SASS_PID_FILE=sass.pid
+if [ -f $SASS_PID_FILE ];
+then
+  echo "Stopping sass watch..."
+  kill -9 `cat $SASS_PID_FILE`
+  rm $SASS_PID_FILE
+else
+  echo "SASS watch is not running"
+fi

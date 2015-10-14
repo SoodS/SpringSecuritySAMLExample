@@ -1,0 +1,40 @@
+
+set_if_empty()
+{
+    KEY=$1;
+    VALUE=$2;
+    if [ "" = "${!KEY}" ]
+    then
+        eval ${KEY}=$VALUE
+    fi
+}
+
+set_if_empty ENVIRONMENT development
+set_if_empty LOG_DIR $(dirname $0)
+set_if_empty DEBUG false
+set_if_empty SASS_WATCH false
+
+if [ "$ENVIRONMENT" == "test" ];
+then
+  ENVIRONMENT=tst
+fi
+
+TOMCAT_DEBUG_OPTS=""
+if [ "$DEBUG" == "true" ];
+then
+  TOMCAT_DEBUG_OPTS="-Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=1045"
+fi
+
+PID_FILE=application.pid
+if [ -f $PID_FILE ];
+then
+  echo "Application is already running"
+else
+  if [ "$SASS_WATCH" == "true" ];
+  then
+    mvn -q sass:watch &
+    ps -ef | grep -v grep | grep "sass:watch" | awk '{print $2}' > sass.pid
+  fi
+
+  mvn -q spring-boot:run -Drun.jvmArguments="-Dsystem.environment=$ENVIRONMENT -Dspring.profiles.active=$ENVIRONMENT -Dlog.output.dir=$LOG_DIR $TOMCAT_DEBUG_OPTS" &
+fi

@@ -1,0 +1,39 @@
+<style type="text/css">
+    #ewb-header #header {
+        font-size: 13px;
+    }
+
+    #ewb-header #header select {
+        color: black;
+    }
+
+    #ewb-header .nav-bar {
+        background-color: #00305e; /* $navBlue */
+        color: white;
+        padding: .5em;
+    }
+
+    #ewb-header a,
+    #ewb-header a:hover,
+    #ewb-header a:visited {color: white;}
+    #ewb-header .user-actions {float: right;}
+</style>
+
+<div id="ewb-header">
+    <nav id="header" class="nav-bar">
+
+        <div class="user-actions">
+           <span class="user-menu">
+                <span class="icon-icom-username"></span>
+                <span>{{user.firstName}}</span>
+
+                {{#user}}
+                <a href="/saml/logout" id="ewb-logout" class="ewb-logout-link">({{#i18n}}logout{{/i18n}})</a>
+                {{/user}}
+            </span>
+        </div>
+
+        &nbsp;&nbsp;&nbsp;
+
+    </nav>
+</div>

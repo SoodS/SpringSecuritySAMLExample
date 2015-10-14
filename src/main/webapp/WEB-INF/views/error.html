@@ -1,0 +1,23 @@
+{{<layout}}
+{{$body}}
+<div class="main-container" id="error">
+    This is base error page.
+    <br/>
+    Error Code :   {{errorCode}}
+    <br/>
+    Error Msg : {{errorMessage}}
+    <div class="error-msg">
+        {{#messageKey}}
+        <div class="mui-box-error">
+            {{errorMessage.message}}
+        </div>
+        {{/messageKey}}
+        {{^messageKey}}
+        <div class="mui-box-error">
+            {{errorContent}}
+        </div>
+        {{/messageKey}}
+    </div>
+</div>
+{{/body}}
+{{/layout}}

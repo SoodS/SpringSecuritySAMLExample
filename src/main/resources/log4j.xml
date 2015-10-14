@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+<log4j:configuration>
+    <appender name="APP_LOG" class="org.apache.log4j.DailyRollingFileAppender">
+        <param name="DatePattern" value="'.'yyyy-MM-dd" />
+        <param name="File" value="${log.output.dir}/SpringSecurityExample.log" />
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern"
+               value="%-5p %d{ISO8601} [%t] %c{3} %X{UID} %m%n" />
+        </layout>
+    </appender>
+   
+   <!-- setup your application loggers -->
+   <logger name="com.ssood" additivity="false">
+        <level value="INFO"/> 
+        <appender-ref ref="APP_LOG"/>
+    </logger>
+
+    <logger name="org.apache" additivity="false">
+        <level value="WARN" />
+        <appender-ref ref="APP_LOG"/>
+    </logger>
+    <logger name="org.apache.catalina" additivity="false">
+        <level value="ERROR" />
+        <appender-ref ref="APP_LOG"/>
+    </logger>
+    <logger name="org.springframework" additivity="false">
+        <level value="WARN" />
+        <appender-ref ref="APP_LOG"/>
+    </logger>
+   
+    <!-- setup log4j's root logger -->
+    <root>
+        <level value="WARN" />
+        <appender-ref ref="APP_LOG"/>
+    </root>
+</log4j:configuration>
